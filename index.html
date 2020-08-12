@@ -10,13 +10,15 @@
 </head>
 <body>
     <header class="container" class="row">
-        <button type="button" class="btn btn-primary" class="col" id="start">Click to Start</button>
-        <span class="badge badge-secondary">Seconds Remaining: <div id="timer">60<div></span>
+        <button type="button" class="btn btn-primary" class="col" id="leaderboard">High Scores</button>
+        <span class="badge badge-secondary" id="timer-bg">Seconds Remaining: <div id="timer">60<div></span>
     </header>
     <main class="jumbotron">
         <h1>Welcome to the Code Quiz!</h1>
         <hr>
-        <div id="questions"></div>
+        <div id="questions"><p>The following quiz is timed, answer correctly to obtain a high score on the leader board. Wrong answers will reduce your time.</p>
+            <button type="button" class="btn btn-primary" id="start">Click to start</button>
+        </div>
     </main>
     <script src="./script.js"></script>
 </body>
