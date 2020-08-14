@@ -1,14 +1,17 @@
-var startButton = document.querySelector("#answer1");
+var startButton = document.querySelector("#start");
 var timer = document.querySelector("#timer");
 var questionBox = document.querySelector("#questions");
 var answer1 = document.querySelector("#answer1");
 var answer2 = document.querySelector("#answer2");
 var answer3 = document.querySelector("#answer3");
 var answer4 = document.querySelector("#answer4");
+var increment = 0;
+var score = 0;
 
 function start(){
-    questionBox.textContent = "The following quiz is timed, answer correctly to obtain a high score on the leader board. Wrong answers will reduce your time."
+    questionBox.textContent = "The following quiz is timed, answer correctly to obtain a high score. Correct answers award 5 points. Wrong answers will subtract 1 point and reduce your time by 5 seconds. Must choose the correct answer to advance."
     startButton.textContent = "Click her to start";
+    answer1.disabled = true;
     answer2.disabled = true;
     answer3.disabled = true;
     answer4.disabled = true;
@@ -30,7 +33,7 @@ var questions = [
     {
         question: "This is question 3?",
         answers: ["ans 3.1","ans 3.2", "ans 3.3","ans 3.4"],
-        correctAnswer: "ans 3.1"
+        correctAnswer: "ans 3.3"
     },
     {
         question: "This is question 4?",
@@ -45,14 +48,60 @@ var questions = [
 ]
 
 function questionFunc(){
+    startButton.style.display = "none";
+    answer1.disabled = false;
     answer2.disabled = false;
     answer3.disabled = false;
     answer4.disabled = false;
-    questionBox.textContent = question;
-    answer1.textContent = answer[0];
-    answer2.textContent = answer[1];
-    answer3.textContent = answer[2];
-    answer3.textContent = answer[3];
+    questionBox.textContent = questions[increment].question;
+    answer1.textContent = questions[increment].answers[0]
+    answer2.textContent = questions[increment].answers[1]
+    answer3.textContent = questions[increment].answers[2]
+    answer4.textContent = questions[increment].answers[3]
+    
+    answer1.addEventListener("click", function(){
+        var choice = this.textContent
+        if (choice === questions[increment].correctAnswer){
+            score = score + 5;
+            increment++;
+            questionFunc();
+        }else{
+            remainingSeconds = remainingSeconds - 5;
+        }
+    })
+    answer2.addEventListener("click", function(){
+        var choice = this.textContent
+        if (choice === questions[increment].correctAnswer){
+            score = score + 5;
+            increment++;
+            questionFunc();
+        }else{
+            remainingSeconds = remainingSeconds - 5;
+        }
+    })
+    answer3.addEventListener("click", function(){
+        var choice = this.textContent
+        if (choice === questions[increment].correctAnswer){
+            score = score + 5;
+            increment++;
+            questionFunc();
+        }else{
+            remainingSeconds = remainingSeconds - 5;
+        }
+    })
+    answer4.addEventListener("click", function(){
+        var choice = this.textContent
+        if (choice === questions[increment].correctAnswer){
+            score = score + 5;
+            increment++;
+            questionFunc();
+        }else{
+            remainingSeconds = remainingSeconds - 5;
+        }
+    })
+
+    
+
 }
 
 var remainingSeconds = 60;
@@ -65,6 +114,9 @@ function startQuiz() {
         if (remainingSeconds < 0){
             clearInterval(timerId);
             timer.textContent = 0;
+            setTimeout(function{
+                //endscreen
+            })
         }
         if (remainingSeconds < 6){
             document.querySelector("#timer-bg").style.backgroundColor = "red";
