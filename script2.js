@@ -49,13 +49,14 @@ function questionFunc(){
     for(i=0; i < questions[idx].answers.length; i++){
         var answerChoice = document.createElement("button");
         answerChoice.setAttribute("class", "btn btn-info btn-lg btn-block");
+        answerChoice.textContent = questions[idx].answers[i];
+        quizBox.append(answerChoice);
     
         answerChoice.addEventListener("click", function(){
             var choice = this.textContent
             if (choice === questions[idx].correctAnswer){
                 quizBox.innerHTML = "";
                 score = score + 5;
-                console.log(score)
                 idx++;
                 if (idx<5){
                     questionFunc();
@@ -74,8 +75,7 @@ function questionFunc(){
             }
 
         });
-        answerChoice.textContent = questions[idx].answers[i] + "\n";
-        quizBox.append(answerChoice);
+
     }
     return;
 }
@@ -84,7 +84,12 @@ function endQuiz(){
     quizBox.innerHTML = "";
     questionEl.textContent = "Congradulations! Your score is " + score + ". Please enter your initials."
     quizBox.appendChild(questionEl);
-    return;
+    var initForm = document.createElement("FORM");
+    initForm.setAttribute("id", "myForm");
+    quizBox.appendChild(initForm);
+    var initInput = document.createElement("INPUT");
+    initInput.setAttribute("type", "text")
+    document.getElementById("myForm").appendChild(initInput);
 }
 
 var remainingSeconds = 60;
@@ -97,6 +102,7 @@ function startQuiz() {
         if (remainingSeconds < 0){
             clearInterval(timerId);
             timer.textContent = 0;
+            endQuiz();
 
         }
         if (remainingSeconds < 6){
