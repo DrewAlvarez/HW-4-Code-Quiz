@@ -114,7 +114,7 @@ function startQuiz() {
         if (remainingSeconds < 0){
             clearInterval(timerId);
             timer.textContent = 0;
-            setTimeout(function{
+            setTimeout(function(){
                 //endscreen
             })
         }
