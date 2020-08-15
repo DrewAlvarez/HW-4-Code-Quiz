@@ -86,11 +86,19 @@ function endQuiz(){
     quizBox.appendChild(questionEl);
     var initForm = document.createElement("FORM");
     initForm.setAttribute("id", "myForm");
-    quizBox.appendChild(initForm);
     var initInput = document.createElement("INPUT");
     initInput.setAttribute("type", "text")
-    document.getElementById("myForm").appendChild(initInput);
-    event.preventDefault();
+    initInput.setAttribute("id", "initials")
+    initForm.appendChild(initInput);
+    quizBox.appendChild(initForm);
+    initForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        var inits = document.querySelector("#initials").value;
+        var hS = {initials: inits, score: score};
+        localStorage.setItem("High Scores", JSON.stringify(hS));
+
+    })
+    
 }
 
 var remainingSeconds = 60;
@@ -100,7 +108,7 @@ function startQuiz() {
     var timerId = setInterval(function(){
         remainingSeconds--
         timer.textContent = Math.floor(remainingSeconds)
-        if (remainingSeconds < 0){
+        if (remainingSeconds < 0 || idx === 5){
             clearInterval(timerId);
             timer.textContent = 0;
             endQuiz();
