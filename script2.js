@@ -90,6 +90,7 @@ function endQuiz(){
     var initInput = document.createElement("INPUT");
     initInput.setAttribute("type", "text")
     document.getElementById("myForm").appendChild(initInput);
+    event.preventDefault();
 }
 
 var remainingSeconds = 60;
