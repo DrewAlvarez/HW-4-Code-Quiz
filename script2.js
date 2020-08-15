@@ -1,5 +1,6 @@
 var startButton = document.querySelector("#start");
 var startText = document.querySelector("#quizStartText")
+var scoreButton = document.querySelector("#leaderboard")
 var timer = document.querySelector("#timer");
 var questionEl = document.createElement("h3");
 var quizBox = document.querySelector("#quiz-area")
@@ -100,6 +101,16 @@ function endQuiz(){
     })
     
 }
+
+function highScores(){
+    quizBox.innerHTML = "";
+    questionEl.textContent = "High Scores!"
+    quizBox.appendChild(questionEl);
+    var scoreList = document.createElement("div")
+    quizBox.appendChild(scoreList);
+}
+
+scoreButton.addEventListener("click", highScores)
 
 var remainingSeconds = 60;
 
